@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bookings - WheelWorks</title>
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <section class="nav-section" style="background-color: rgb(35, 35, 35);">
+        <div class="nav-container">
+            <div class="logo-container">
+                <img src="./car assets/logo1.png" alt="WheelWorks Logo">
+            </div><div class="menu-container">
+                <li><a href="home.html">Home</a></li>
+                <li><a href="cars.html">Cars</a></li>
+                <li><a href="bookings.html">Bookings</a></li>
+                <li><a href="contactUs.html">Contact Us</a></li>
+            </div> <div class="login-container">
+                <a href=""><span class="material-symbols-outlined">account_circle</span></a>
+            </div></div></section><div class="heading">
+        <h1>Reserve your vehicle today!</h1>
+        <p>Fill out the form below to reserve your vehicle. Complete the necessary details to ensure a smooth rental experience.</p>
+    </div><div class="booking-wrapper">
+        <div class="left-booking-cont">
+            <form class="bookings-form" id="bookingForm">
+                <div class="row1">
+                    <input type="text" class="fname" id="fullName" placeholder="Enter Full Name" required>
+                    <input type="email" class="fname" id="email" placeholder="Enter Your Email" required>
+                    <input type="number" class="fname" id="phoneNumber" placeholder="Enter Phone Number" required>
+                </div><label for="pickupAddress" class="pickup-lable">Pickup Details</label>
+                <textarea name="pickup-address" id="pickupAddress" class="pickup-address" rows="3" cols="98" placeholder="Enter Pickup Address" required></textarea>
+
+                <div class="row3">
+                    <input type="date" class="pickup-date" id="pickupDate" required>
+                    <select name="pickup-time" id="pickupTime" required>
+                        <option value="">--Please Choose Pickup Time--</option>
+                        <option value="01:00">01:00 AM</option>
+                        <option value="01:30">01:30 AM</option>
+                        <option value="02:00">02:00 AM</option>
+                        <option value="02:30">02:30 AM</option>
+                        <option value="03:00">03:00 AM</option>
+                        <option value="03:30">03:30 AM</option>
+                        <option value="04:00">04:00 AM</option>
+                        <option value="04:30">04:30 AM</option>
+                        <option value="05:00">05:00 AM</option>
+                        <option value="05:30">05:30 AM</option>
+                        <option value="06:00">06:00 AM</option>
+                        <option value="06:30">06:30 AM</option>
+                        <option value="07:00">07:00 AM</option>
+                        <option value="07:30">07:30 AM</option>
+                        <option value="08:00">08:00 AM</option>
+                        <option value="08:30">08:30 AM</option>
+                        <option value="09:00">09:00 AM</option>
+                        <option value="09:30">09:30 AM</option>
+                        <option value="10:00">10:00 AM</option>
+                        <option value="10:30">10:30 AM</option>
+                        <option value="11:00">11:00 AM</option>
+                        <option value="11:30">11:30 AM</option>
+                        <option value="12:00">12:00 PM</option>
+                        <option value="12:30">12:30 PM</option>
+                        <option value="13:00">01:00 PM</option>
+                        <option value="13:30">01:30 PM</option>
+                        <option value="14:00">02:00 PM</option>
+                        <option value="14:30">02:30 PM</option>
+                        <option value="15:00">03:00 PM</option>
+                        <option value="15:30">03:30 PM</option>
+                        <option value="16:00">04:00 PM</option>
+                        <option value="16:30">04:30 PM</option>
+                        <option value="17:00">05:00 PM</option>
+                        <option value="17:30">05:30 PM</option>
+                        <option value="18:00">06:00 PM</option>
+                        <option value="18:30">06:30 PM</option>
+                        <option value="19:00">07:00 PM</option>
+                        <option value="19:30">07:30 PM</option>
+                        <option value="20:00">08:00 PM</option>
+                        <option value="20:30">08:30 PM</option>
+                        <option value="21:00">09:00 PM</option>
+                        <option value="21:30">09:30 PM</option>
+                        <option value="22:00">10:00 PM</option>
+                        <option value="22:30">10:30 PM</option>
+                        <option value="23:00">11:00 PM</option>
+                        <option value="23:30">11:30 PM</option>
+                        <option value="24:00">12:00 AM (Next Day)</option>
+                    </select>
+                </div><label for="dropoffAddress" class="dropoff-lable">Dropoff Details</label>
+                <textarea name="dropoff-address" id="dropoffAddress" class="dropoff-address" rows="3" cols="98" placeholder="Enter Dropoff Address" required></textarea>
+
+                <div class="row5">
+                    <input type="date" class="dropoff-date" id="dropoffDate" style="width:460px;" required>
+                    <select name="dropoff-time" id="dropoffTime" required>
+                        <option value="">--Please Choose Dropoff Time--</option>
+                        <option value="01:00">01:00 AM</option>
+                        <option value="01:30">01:30 AM</option>
+                        <option value="02:00">02:00 AM</option>
+                        <option value="02:30">02:30 AM</option>
+                        <option value="03:00">03:00 AM</option>
+                        <option value="03:30">03:30 AM</option>
+                        <option value="04:00">04:00 AM</option>
+                        <option value="04:30">04:30 AM</option>
+                        <option value="05:00">05:00 AM</option>
+                        <option value="05:30">05:30 AM</option>
+                        <option value="06:00">06:00 AM</option>
+                        <option value="06:30">06:30 AM</option>
+                        <option value="07:00">07:00 AM</option>
+                        <option value="07:30">07:30 AM</option>
+                        <option value="08:00">08:00 AM</option>
+                        <option value="08:30">08:30 AM</option>
+                        <option value="09:00">09:00 AM</option>
+                        <option value="09:30">09:30 AM</option>
+                        <option value="10:00">10:00 AM</option>
+                        <option value="10:30">10:30 AM</option>
+                        <option value="11:00">11:00 AM</option>
+                        <option value="11:30">11:30 AM</option>
+                        <option value="12:00">12:00 PM</option>
+                        <option value="12:30">12:30 PM</option>
+                        <option value="13:00">01:00 PM</option>
+                        <option value="13:30">01:30 PM</option>
+                        <option value="14:00">02:00 PM</option>
+                        <option value="14:30">02:30 PM</option>
+                        <option value="15:00">03:00 PM</option>
+                        <option value="15:30">03:30 PM</option>
+                        <option value="16:00">04:00 PM</option>
+                        <option value="16:30">04:30 PM</option>
+                        <option value="17:00">05:00 PM</option>
+                        <option value="17:30">05:30 PM</option>
+                        <option value="18:00">06:00 PM</option>
+                        <option value="18:30">06:30 PM</option>
+                        <option value="19:00">07:00 PM</option>
+                        <option value="19:30">07:30 PM</option>
+                        <option value="20:00">08:00 PM</option>
+                        <option value="20:30">08:30 PM</option>
+                        <option value="21:00">09:00 PM</option>
+                        <option value="21:30">09:30 PM</option>
+                        <option value="22:00">10:00 PM</option>
+                        <option value="22:30">10:30 PM</option>
+                        <option value="23:00">11:00 PM</option>
+                        <option value="23:30">11:30 PM</option>
+                        <option value="24:00">12:00 AM (Next Day)</option>
+                    </select>
+                    <input type="number" id="no-of-days" class="no-of-days" placeholder="Enter Number Of Days" required>
+                </div><button class="submit" id="submit" type="submit">Submit</button>
+            </form></div><div class="right-booking-cont">
+            <h3>Cancellation & Refund policy</h3>
+            <div class="cancellation-bottom">
+                <div class="para-wrapper"><i class="fa-regular fa-circle-check"></i> 
+                    <h6>What if my plans change?</h6>
+                </div>
+                <b>Booking Cancellation:</b>
+                Cancellations made 24 hours before pickup are fully refundable.
+                Cancellations within 24 hours incur a 50% charge.
+                No refund for last-minute cancellations or no-shows. <br><br>
+                
+                <b>Refund Processing:</b>
+                Refunds are processed within 5-7 business days.
+                The amount will be credited to the original payment method.
+                Processing time may vary based on the bank.
+                <br> <br>
+                <b>Modification Requests:</b>
+                Booking modifications are allowed based on availability.
+                Date or vehicle changes may incur additional charges.
+                Contact support for modifications before the rental period.
+            </div></div></div><div class="summary-and-payment-wrapper" style="display: none;">
+                 <h2 class="booking-summary-heading">Booking Summary</h2>
+        <div class="invoice-container" id="invoiceContainer">
+            <div class="order-summary">
+                <h3>Your Ride Details</h3>
+                <div class="car-info">
+                    <p><strong>Car Name:</strong> <span id="summaryCarName"></span></p>
+                    <p><strong>Brand:</strong> <span id="summaryCarBrand"></span></p>
+                    <p><strong>Location:</strong> <span id="summaryCarLocation"></span></p>
+                    <p><strong>Price per Hour:</strong><span id="summaryPricePerHour"> </span></p>
+                    <p><strong>Number of Days:</strong> <span id="summaryNumDays"></span></p>
+                </div>
+            </div>
+
+            <div class="payment-container">
+                <div class="pricing-details-cont">
+                    <h6>Price Details</h6>
+                    <div class="prices">
+                        <p><span id="displayNumDays" class="displayNumDays"></span> <span id="basePrice"></span></p>
+                        <p>GST(+5%): <span id="gstAmount"></span></p>
+                    </div>
+                </div>
+                <div class="divider"></div>
+                <div class="total-price-cont">
+                    <h5 style="color: black;">Total Amount: <span id="totalPrice" class="text-primary"></span></h5>
+                </div>
+                <div class="payment-buttons">
+                    <button id="generateInvoiceBtn" class="btn btn-primary mt-3 btn-sm">Generate Invoice</button>
+                    <button id="mockPaymentBtn" data-bs-toggle="modal" data-bs-target="#paymentModal" class="btn btn-success mt-3 btn-sm">Pay Now</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="paymentModal" tabindex="-1" aria-labelledby="paymentModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="paymentModalLabel">Select Payment Method</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="payment-options">
+                    <div class="card payment-card mb-3"> <div class="card-body">
+                            <input type="radio" id="cashOnDelivery" name="paymentMethod" value="cod" checked>
+                            <label for="cashOnDelivery" class="ms-2">Cash on Delivery</label>
+                        </div>
+                    </div>
+                    <div class="card payment-card">
+                        <div class="card-body">
+                            <input type="radio" id="payOnline" name="paymentMethod" value="online">
+                            <label for="payOnline" class="ms-2">Pay Online</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-success mt-3" style="font-weight: 500;">
+                    <i class="fa-solid fa-tags me-2"></i>Extra discount with bank offers
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" id="proceedToPayBtn">Proceed to Pay</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer class="footer" style="margin-top: 0;">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <h3>WheelWorks</h3>
+                <p>Experience the ease <br> and convenience of renting a car <br> with WheelWorks.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Legal Policy</h4>
+                <ul>
+                    <li><a href="#">Term & Condition</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Legal Notice</a></li>
+                    <li><a href="#">Accessibility</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                     <li><a href="home.html">Home</a></li>
+                    <li><a href="cars.html" class="highlight">Cars</a></li>
+                    <li><a href="">Bookings</a></li>
+                    <li><a href="contactUs.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Subscribe To Our Newsletters</h4>
+                <form>
+                    <input type="email" placeholder="Email..." class="email-input">
+                    <button type="submit" class="subscribe-btn">Subscribe</button>
+                </form>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2024 Novaride. All rights reserved.</p>
+            <div class="social-links">
+                <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+                <a href="#"><i class="fa-brands fa-instagram"></i></a>
+            </div>
+        </div>
+    </footer>
+
+
+<script src="script.js"></script>
+         <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const payNowBtn = document.getElementById("mockPaymentBtn");
+    payNowBtn.addEventListener("click", function () {
+      console.log("Pay Now clicked");
+      // Optional: Manually trigger modal (uncomment below if needed)
+      // const modal = new bootstrap.Modal(document.getElementById('paymentModal'));
+      // modal.show();
+    });
+  });
+</script>
+
+</body>
+</html>

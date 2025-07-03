@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Details</title>
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        async function fetchCarDetails(carId) {
+            try {
+                const response = await axios.get('http://localhost:3000/car-elements'); // Replace with your JSON file path
+                const carDetails = response.data.find(car => car.id === carId); // Find the car by ID
+                displayDetails(carDetails); // Pass the found car details to displayDetails
+            } catch (error) {
+                console.error('Error fetching car data:', error);
+                document.body.innerHTML = `<p class="error-message">Failed to load car details. Please try again later.</p>`;
+            }
+        }
+
+        function displayDetails(cardetails) {
+            const overallWrapper = document.createElement('div');
+            overallWrapper.className = 'overall-sec';
+
+            const carDetailCard = document.createElement('div');
+            carDetailCard.className = 'car-detail-card';
+            carDetailCard.innerHTML = `
+                <div class="left-container3">
+                    <div class="images-wrapper">
+                        <div class="main-img">
+                            <img src="${cardetails.image1}" alt="${cardetails.car_name}">
+                        </div>
+                        <div class="sub-imges">
+                            <img src="${cardetails.image2}" alt="${cardetails.car_name}">
+                            <img src="${cardetails.image3}" alt="${cardetails.car_name}">
+                            <img src="${cardetails.image4}" alt="${cardetails.car_name}">
+                        </div>
+                    </div>
+                    <div class="booknow-container">
+                        <div class="price-wrapper">
+                            INR <span class="price-span">${cardetails.price}</span> /DAY
+                        </div>
+                        <div class="bknow-button-contianer">
+                            <h3>Interested in Renting This Car?</h3>
+                            <button class="book-button">
+                                <a href="bookings.html"> Book Now</a> 
+                            </button>
+                        </div>
+                        <h2 class="contact-heading">Contact Us</h2>
+                        <div class="email-container">
+                            <span class="material-symbols-outlined"> mail</span> 
+                            <p>info@wheelworks.com</p>
+                        </div>
+                        <div class="phone-container">
+                            <span class="material-symbols-outlined"> call </span>
+                            <p>+91 9952349786</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="right-container3">
+                    <h1 class="car-name">${cardetails.car_name}</h1>
+                    <div class="top-part">
+                        <h3>Know About Our Car Services</h3>
+                        <p>At WheelWorks, we are dedicated to keeping your car in perfect condition. From routine maintenance and oil changes to complex repairs and diagnostics, our expert team ensures your vehicle receives the best care possible. Your safety and satisfaction are our top priorities, making us the go-to destination for all your car service needs. Trust us to keep you moving, mile after mile!</p>
+                    </div>
+                    <div class="bottom-part">
+                        <h3>Specifications</h3>
+                        <div class="spec-wrapper">
+                            <div class="spec-item-container"><h6>Mileage</h6><h6 class="value">${cardetails.mileage}</h6></div>
+                            <div class="spec-item-container"><h6>Transmission</h6><h6 class="value">${cardetails.auto_manu}</h6></div>
+                            <div class="spec-item-container"><h6>Seats</h6><h6 class="value">${cardetails.seats}</h6></div>
+                            <div class="spec-item-container"><h6>Baggage</h6><h6 class="value">${cardetails.luggage}</h6></div>
+                            <div class="spec-item-container"><h6>Year</h6><h6 class="value">${cardetails.Year}</h6></div>
+                            <div class="spec-item-container"><h6>Type</h6><h6 class="value">${cardetails.car_type}</h6></div>
+                            <div class="spec-item-container"><h6>Brand</h6><h6 class="value">${cardetails.car_brand}</h6></div>
+                            <div class="spec-item-container"><h6>Location</h6><h6 class="value">${cardetails.location}</h6></div>
+                        </div>
+                        <h3>Features</h3>
+                        <div class="features2-wrapper">
+                            <div class="feat1">
+                                <div class="item"><span class="material-symbols-outlined">check_circle</span>Cruise Control</div>
+                                <div class="item"><span class="material-symbols-outlined">check_circle</span>Built-in GPS</div>
+                                <div class="item"><span class="material-symbols-outlined">check_circle</span>Music System</div>
+                            </div>
+                            <div class="feat2">
+                                <div class="item"><span class="material-symbols-outlined">check_circle</span>Wireless Charging</div>
+                                <div class="item"><span class="material-symbols-outlined">check_circle</span>Air Conditioning</div>
+                                <div class="item"><span class="material-symbols-outlined">check_circle</span>Parking Sensors</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>`;
+            overallWrapper.appendChild(carDetailCard); // Append the car detail card to the overall wrapper
+            document.body.appendChild(overallWrapper); // Append the overall wrapper to the body
+        }
+
+        // Fetch details of a specific car (replace '2d89' with the desired car ID)
+        window.onload = () => fetchCarDetails('f57c'); // Example car ID
+    </script>
+</head>
+<body>
+   
+    <div id="car-details-container"></div>
+</body>
+</html>
