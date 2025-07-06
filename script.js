@@ -1,14 +1,3 @@
-// script.js
-
-// home page code (commented out as per original file)
-// function searchCarsFromHome() {
-//   const brand = document.getElementById("car-brand").value;
-//   const type = document.getElementById("car-type").value;
-//   const location = document.getElementById("car-location").value;
-//   window.location.href = `cars.html?brand=${brand}&type=${type}&location=${location}`;
-// }
-
-// Accordion code (remains unchanged)
 const accordions = document.querySelectorAll(".accordion"); 
 accordions.forEach(acc => {
     acc.addEventListener('click', function() {
@@ -27,7 +16,6 @@ accordions.forEach(acc => {
 const container = document.getElementById("cars-container");
 const carDetailContainer = document.getElementById("car-detail-container");
 const carsBody = document.getElementById("cars-body");
-
 // Fetch car data from JSON server
 async function fetchCars() {
     try {
@@ -35,24 +23,19 @@ async function fetchCars() {
         return response.data; // Return the car elements
     } catch (error) {
         console.error('Error fetching car data:', error);
-        if (container) { // Check if container exists before updating its innerHTML
+        if (container) { 
             container.innerHTML = `<p class="error-message">Failed to load cars. Please ensure the JSON server is running (http://localhost:3000) and try again.</p>`;
         } else {
-            // Fallback for cases where container might not be present (e.g., on car details page initially)
             const wrapper = document.getElementById("car-cards-wrapper");
             if (wrapper) wrapper.innerHTML = `<p class="error-message">Failed to load cars. Please ensure the JSON server is running (http://localhost:3000) and try again.</p>`;
         }
-        return []; // Return empty array on error to prevent further issues
+        return []; 
     }
 }
-
-// Display cars in the car-cards-wrapper
 function displayCars(cars) {
     const wrapper = document.getElementById("car-cards-wrapper");
-    if (!wrapper) return; // Exit if wrapper doesn't exist (e.g., on bookings page)
-
-    wrapper.innerHTML = ""; // Clear previous content
-
+    if (!wrapper) return; 
+    wrapper.innerHTML = ""; 
     if (cars.length > 0) {
         cars.forEach(car => {
             const card = document.createElement('div');
@@ -101,12 +84,10 @@ function displayCars(cars) {
 async function fetchCarDetails(carId) {
     try {
         const response = await axios.get('http://localhost:3000/car-elements'); 
-        const carDetails = response.data.find(car => car.id == carId); // Use == for loose equality to match string/number IDs
-
+        const carDetails = response.data.find(car => car.id == carId); 
         if (!carDetails) {
             throw new Error('Car not found');
         }
-
         displayDetails(carDetails); 
     } catch (error) {
         console.error('Error fetching car details:', error);
@@ -115,22 +96,17 @@ async function fetchCarDetails(carId) {
         }
     }
 }
-
 function displayDetails(cardetails) {
-    // Hide the cars body and search container, show the car detail container
     if (carsBody) carsBody.style.display = "none";
     if (carDetailContainer) carDetailContainer.style.display = "block";
     const searchcont = document.querySelector(".search-container");
     if (searchcont) searchcont.style.display = "none";
-
     const imgSection = document.querySelector('.img-section');
-    // Remove existing breadcrumb to prevent duplicates
     const existingBreadcrumb = imgSection ? imgSection.querySelector('.breadcrumb-container') : null;
     if (existingBreadcrumb) {
         existingBreadcrumb.remove();
     }
 
-    // Create and insert breadcrumb HTML
     const breadcrumbHTML = `
         <div class="breadcrumb-container">
             <nav aria-label="breadcrumb">
@@ -147,10 +123,7 @@ function displayDetails(cardetails) {
 
     const carDetailCard = document.createElement('div');
     carDetailCard.className = 'car-detail-card';
-
-    // Construct the booking URL with all necessary details
     const bookingUrl = `bookings.html?id=${cardetails.id}&name=${encodeURIComponent(cardetails.car_name)}&brand=${encodeURIComponent(cardetails.car_brand)}&location=${encodeURIComponent(cardetails.location)}&price=${cardetails.price}`;
-
     carDetailCard.innerHTML = `
         <div class="left-container3">
             <div class="images-wrapper">
@@ -219,27 +192,22 @@ function displayDetails(cardetails) {
         </div>`;
 
     if (carDetailContainer) {
-        carDetailContainer.innerHTML = ""; // Clear previous content
+        carDetailContainer.innerHTML = ""; 
         carDetailContainer.appendChild(carDetailCard);
     }
 }
-
 function changeImage(image){
     const largeImage = document.getElementById('main-img');
     if (largeImage) { // Check if element exists
         largeImage.src = image;
     }
 }
-
-// Load cars on window load — with home page filters support (for cars.html)
 window.addEventListener('load', async () => {
-    // Only execute this logic if on cars.html
     if (window.location.pathname.includes('cars.html')) {
         const urlParams = new URLSearchParams(window.location.search);
         let selectedBrand = urlParams.get('brand')?.toLowerCase().trim() || "";
         let selectedType = urlParams.get('type')?.toLowerCase().trim() || "";
         let selectedLocation = urlParams.get('location')?.toLowerCase().trim() || "";
-
         const cars = await fetchCars(); 
         let filtered = cars;
 
@@ -258,42 +226,36 @@ window.addEventListener('load', async () => {
     }
 });
 
-// Handle user input for searching cars (for cars.html)
 async function fetchProducts() {
-    if (!window.location.pathname.includes('cars.html')) return; // Only run on cars.html
+    if (!window.location.pathname.includes('cars.html')) return; 
     const cars = await fetchCars();
     const userInput = document.getElementById("car-search-input").value.toLowerCase();
     const filteredCars = cars.filter(car => car.car_name.toLowerCase().includes(userInput));
     displayCars(filteredCars);
 }
 
-// Handle Enter key press for searching (for cars.html)
 function handleEnter(event) {
     if (window.location.pathname.includes('cars.html') && event.key === "Enter") {
         fetchProducts();
     }
 }
 
-// Event listener for search button (for cars.html)
 const carSearchButton = document.getElementById("car-search-button");
 if (carSearchButton) {
     carSearchButton.addEventListener("click", fetchProducts);
 }
 
-// Event listener for the search input (for cars.html)
 const carSearchInput = document.getElementById("car-search-input");
 if (carSearchInput) {
     carSearchInput.addEventListener("keydown", handleEnter);
 }
 
-// Filter cars based on selected checkboxes and radio buttons (for cars.html)
 async function applyFilters() {
-    if (!window.location.pathname.includes('cars.html')) return; // Only run on cars.html
-    const cars = await fetchCars(); // Fetch all cars to re-filter
+    if (!window.location.pathname.includes('cars.html')) return; 
+    const cars = await fetchCars(); 
     const selectedTypes = Array.from(document.querySelectorAll('.car-type:checked')).map(cb => cb.value);
     const selectedBrands = Array.from(document.querySelectorAll('.car-brand:checked')).map(cb => cb.value);
     const selectedPriceRange = document.querySelector('input[name="select"]:checked')?.value;
-
     const filteredCars = cars.filter(car => {
         const typeMatch = selectedTypes.length === 0 || selectedTypes.includes(car.car_type.toLowerCase());
         const brandMatch = selectedBrands.length === 0 || selectedBrands.includes(car.car_brand.toLowerCase());
@@ -303,13 +265,11 @@ async function applyFilters() {
     });
     displayCars(filteredCars);
 }
-
-// Check if car price matches the selected price range (for cars.html)
 function filterByPrice(price, range) {
     if (!range || range === 'all') return true;
 
-    const numericPrice = parseFloat(price); // Ensure price is a number
-    if (isNaN(numericPrice)) return false; // Handle invalid prices gracefully
+    const numericPrice = parseFloat(price);
+    if (isNaN(numericPrice)) return false; 
 
     switch (range) {
         case '84-109':
@@ -323,18 +283,16 @@ function filterByPrice(price, range) {
     }
 }
 
-// Event listener for checkboxes and radio buttons (for cars.html)
 document.querySelectorAll('.car-type, .car-brand, .price').forEach(input => {
-    input.addEventListener('change', applyFilters); // Call applyFilters on change
+    input.addEventListener('change', applyFilters); 
 });
 
-// Location button functionality (for cars.html)
 document.querySelectorAll('.location-button').forEach(button => {
     button.addEventListener('click', async () => {
-        if (!window.location.pathname.includes('cars.html')) return; // Only run on cars.html
+        if (!window.location.pathname.includes('cars.html')) return; 
         const cars = await fetchCars();
         const location = button.getAttribute('data-location');
-        if (location === 'show-all') { // Corrected logic for 'Show All'
+        if (location === 'show-all') { 
              displayCars(cars);
         } else {
             const filteredCars = cars.filter(car => car.location.toLowerCase() === location.toLowerCase());
@@ -342,19 +300,13 @@ document.querySelectorAll('.location-button').forEach(button => {
         }
     });
 });
-
-// ==================== Bookings Page Specific Logic =======================
-
-
 // ==================== Bookings Page Specific Logic =======================
 
 document.addEventListener('DOMContentLoaded', () => {
     const bookingForm = document.getElementById('bookingForm');
     const summaryAndPaymentWrapper = document.querySelector('.summary-and-payment-wrapper');
     const generateInvoiceBtn = document.getElementById('generateInvoiceBtn');
-    const mockPaymentBtn = document.getElementById('mockPaymentBtn'); // Assuming this button exists
-
-    // Ensure the summary wrapper is hidden when the bookings page loads
+    const mockPaymentBtn = document.getElementById('mockPaymentBtn'); 
     if (summaryAndPaymentWrapper) {
         summaryAndPaymentWrapper.style.display = 'none';
     }
@@ -374,7 +326,6 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
         console.warn("No car selected via URL. Please select a car from the cars page to ensure accurate booking calculations.");
     }
-
     if (bookingForm) {
         const fullNameInput = document.getElementById('fullName');
         const emailInput = document.getElementById('email');
@@ -386,7 +337,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const dropoffDateInput = document.getElementById('dropoffDate');
         const dropoffTimeInput = document.getElementById('dropoffTime');
         const numberOfDaysInput = document.getElementById('no-of-days');
-
         bookingForm.addEventListener('submit', (event) => {
             event.preventDefault(); 
 
@@ -411,8 +361,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 alert('Please go back to the cars and select a car to proceed.');
                 return;
             }
-
-            // Calculate prices
             const pricePerHour = selectedCar.price;
             const hours = numberOfDays * 24; 
             const baseRent = pricePerHour * hours;
@@ -420,20 +368,17 @@ document.addEventListener('DOMContentLoaded', () => {
             const gstAmount = baseRent * gstRate;
             const totalAmount = baseRent + gstAmount;
 
-            // Populate Order Summary
             document.getElementById('summaryCarName').textContent = selectedCar.car_name;
             document.getElementById('summaryCarBrand').textContent = selectedCar.car_brand;
             document.getElementById('summaryCarLocation').textContent = selectedCar.location;
             document.getElementById('summaryPricePerHour').textContent = "INR " + pricePerHour.toFixed(2);
             document.getElementById('summaryNumDays').textContent = numberOfDays;
 
-            // Populate Price Details
             document.getElementById('displayNumDays').textContent ="Rent (for " + numberOfDays + " days)";
             document.getElementById('basePrice').textContent = `INR ${baseRent.toFixed(2)}`;
             document.getElementById('gstAmount').textContent = `INR ${gstAmount.toFixed(2)}`;
             document.getElementById('totalPrice').textContent = `INR ${totalAmount.toFixed(2)}`;
 
-            // Show the summary and payment section
             if (summaryAndPaymentWrapper) {
                 summaryAndPaymentWrapper.style.display = 'block';
                 summaryAndPaymentWrapper.scrollIntoView({ behavior: 'smooth' });
@@ -441,12 +386,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Event listener for Generate Invoice button - MOVED HERE, NO NESTED DOMContentLoaded
     generateInvoiceBtn.addEventListener('click', function () {
-        // Create a new element to hold the invoice content for PDF generation
+      
         const pdfContent = document.createElement('div');
-
-        // Dynamically get all values just before generating the PDF
         const fullName = document.getElementById('fullName').value;
         const email = document.getElementById('email').value;
         const phoneNumber = document.getElementById('phoneNumber').value;
@@ -547,11 +489,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <p class="thank-you">Thank you for choosing WheelWorks!</p>
             </div>
         `;
-
-        // Log the content to the console to verify before PDF generation
         console.log("PDF Content HTML:", pdfContent.innerHTML);
-
-        // Generate PDF
         html2pdf().from(pdfContent).save('WheelWorks_Booking_Invoice.pdf');
     });
 });

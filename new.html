@@ -10,15 +10,14 @@
     <script>
         async function fetchCarDetails(carId) {
             try {
-                const response = await axios.get('http://localhost:3000/car-elements'); // Replace with your JSON file path
-                const carDetails = response.data.find(car => car.id === carId); // Find the car by ID
-                displayDetails(carDetails); // Pass the found car details to displayDetails
+                const response = await axios.get('http://localhost:3000/car-elements'); 
+                const carDetails = response.data.find(car => car.id === carId); 
+                displayDetails(carDetails); 
             } catch (error) {
                 console.error('Error fetching car data:', error);
                 document.body.innerHTML = `<p class="error-message">Failed to load car details. Please try again later.</p>`;
             }
         }
-
         function displayDetails(cardetails) {
             const overallWrapper = document.createElement('div');
             overallWrapper.className = 'overall-sec';
@@ -91,16 +90,13 @@
                         </div>
                     </div>
                 </div>`;
-            overallWrapper.appendChild(carDetailCard); // Append the car detail card to the overall wrapper
-            document.body.appendChild(overallWrapper); // Append the overall wrapper to the body
+            overallWrapper.appendChild(carDetailCard); 
+            document.body.appendChild(overallWrapper);
         }
-
-        // Fetch details of a specific car (replace '2d89' with the desired car ID)
-        window.onload = () => fetchCarDetails('f57c'); // Example car ID
+        window.onload = () => fetchCarDetails('f57c'); 
     </script>
 </head>
 <body>
-   
-    <div id="car-details-container"></div>
+       <div id="car-details-container"></div>
 </body>
 </html>
